@@ -3,5 +3,8 @@ module.exports = {
   OPENWEATHER_TOKEN: process.env.OPENWEATHER_TOKEN || '',
   // You can add your own tmdb token here (https://www.themoviedb.org/)
   MOVIEDB_TOKEN: process.env.MOVIEDB_TOKEN || '',
+  // You can add your own tmdb token here (https://www.themoviedb.org/)
+  PANDA_TOKEN: process.env.PANDA_TOKEN || '',
+  // Port
   PORT: process.env.PORT || 5000,
 };
