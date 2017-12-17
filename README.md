@@ -1,22 +1,41 @@
-# skills
+[logo]: /assets/inline.png "Panda Score + Recast.AI"
+![alt text][logo]
 
-This is the backend for two different skills you can add to your bot on [Recast.ai](http://recast.ai/).
+# League of Legends Bot for Messenger
 
-To start the API after cloning the project:
-```bash
-npm install
-npm start
-```
-Since this API relies on external services, you can setup your tokens for [Open Weather Map](https://openweathermap.org/api) and [The Movie Database](https://www.themoviedb.org/) either in `./config.js` or as environment variables : `OPENWEATHER_TOKEN` and `MOVIEDB_TOKEN`.
+A [League of Legends](https://leagueoflegends.com/en/) bot using [Panda Score](https://pandascore.co) E-Sport API & [Recast.AI](https://recast.ai) NLP
 
-You can also change the port of the API in `./config.js` (it listens on port `5000` by default)
+Follow the instructions below to create your bot:
 
-Then you need to go to the settings of your bot on Recast.ai and change the field `Bot base URL` to the URL of your server.
+## Step 1: Deploy the bot on Heroku
 
-[Ngrok](https://ngrok.com/) could come in handy if you just want to try out the API without having to host this code on a public server :)
+1. Make sure you are logged in to the [Heroku Dashboard](https://dashboard.heroku.com/)
+1. Click the button below to deploy the Messenger bot on Heroku:
 
-## Requirements
+    [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-#### Node version
+1. Fill in the config variables as described.
+    - For **PANDA_TOKEN**, enter the Consumer Key of your Panda Score account - you can create a free account on the [Panda Score](https://pandascore.co) website
 
-v6.0 or higher required
+## Step 2: Get your Recast.AI bot
+
+1. Make sure you are logged in to your [Recast.AI account](https://recast.ai/)
+1. Follow this link [League of Legends bot](https://recast.ai/pe/league-of-legends-bot/) and fork the bot to your account
+1. Got to your bot settings and copy paste your **Heroku App URL** in the **Bot base URL**
+
+## Step 3: Connect your bot to Messenger
+
+1. Go to your **Connect** tab
+1. Click the **Messenger** channel and follow the instructions
+1. You're all set !
+
+## Author
+
+PE Lieb [@liebpe](https://twitter.com/liebpe)
+
+You can follow us on Twitter at [@recastai](https://twitter.com/recastai) for updates and releases.
+
+## Special thanks
+
+For providing support and resources :
+- Panda Score [@panda_score](https://twitter.com/panda_score)
