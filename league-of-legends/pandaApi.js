@@ -10,7 +10,7 @@ function getGames(leagueId) {
 function pandaApiCall(leagueId) {
   return axios.get(`https://api.pandascore.co/leagues/${leagueId}/series`, {
     headers: {
-        Authorization: `Bearer ${confid.PANDA_TOKEN}`
+        Authorization: `Bearer ${config.PANDA_TOKEN}`
     },
     params: {
       'filter[future]': true,

@@ -6,6 +6,6 @@
       "description": "Panda Score Token for requests",
       "value":"",
       "required": true
-    },
+    }
   }
 }
