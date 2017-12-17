@@ -1,0 +1,15 @@
+{
+  "name": "LoL Bot with Recast",
+  "description": "League of Legends Bot for Messenger with Recast.AI",
+  "env": {
+    "PANDA_TOKEN": {
+      "description": "Panda Score Token for requests",
+      "value":""
+    },
+    "RE_BOT_TOKEN": {
+      "description": "Recast bot token",
+      "value":"",
+      "required":false
+    }
+  }
+}
