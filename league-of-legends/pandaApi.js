@@ -23,7 +23,7 @@ function pandaApiCall(leagueId) {
     params: {
       'filter[future]': true,
     },
-  })
+  }))
   .catch(function(error) {
       return null
   });
