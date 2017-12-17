@@ -2,7 +2,7 @@ const config = require('../config');
 const { getGames } = require('./pandaApi');
 const constants = require('./constants');
 
-function loadLoLGetLeaueGamesRoute(app) {
+function loadLoLGetLeagueGamesRoute(app) {
   app.post('/lol-league-games', function(req, res) {
     console.log('[GET] /lol-league-games');
     const league = req.body.conversation.memory['league-name'];
@@ -19,4 +19,4 @@ function loadLoLGetLeaueGamesRoute(app) {
       });
   });
 }
-module.exports = loadLoLGetLeaueGamesRoute;
+module.exports = loadLoLGetLeagueGamesRoute;
