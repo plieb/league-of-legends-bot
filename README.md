@@ -1,7 +1,7 @@
 [logo]: /assets/inline.png "Panda Score + Recast.AI"
 ![alt text][logo]
 
-# League of Legends Bot for Facebook Messenger using Panda Score API and Recast.AI 
+# League of Legends Bot for Messenger
 
 A [League of Legends](https://leagueoflegends.com/en/) bot using [Panda Score](https://pandascore.co) E-Sport API & [Recast.AI](https://recast.ai) NLP
 
@@ -14,9 +14,8 @@ Follow the instructions below to create your bot:
 
     [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-    1. Fill in the config variables as described.
-
-    - For **PANDA_TOKEN**, enter the Consumer Key of your Panda Score account - you can create a free account @[Panda Score](https://pandascore.co)
+1. Fill in the config variables as described.
+    - For **PANDA_TOKEN**, enter the Consumer Key of your Panda Score account - you can create a free account on the [Panda Score](https://pandascore.co) website
 
 ## Step 2: Get your Recast.AI bot
 
@@ -32,7 +31,7 @@ Follow the instructions below to create your bot:
 
 ## Author
 
-PE Lieb [@liebpe](https://twitter.com/pedward_lieb)
+PE Lieb [@liebpe](https://twitter.com/liebpe)
 
 You can follow us on Twitter at [@recastai](https://twitter.com/recastai) for updates and releases.
 
