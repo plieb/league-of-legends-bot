@@ -20,7 +20,7 @@ Follow the instructions below to create your bot:
 ## Step 2: Get your Recast.AI bot
 
 1. Make sure you are logged in to your [Recast.AI account](https://recast.ai/)
-1. Follow this link [League of Legends bot](httpshttps://recast.ai/pe/league-of-legends-bot/) and fork the bot to your account
+1. Follow this link [League of Legends bot](https://recast.ai/pe/league-of-legends-bot/) and fork the bot to your account
 1. Got to your bot settings and copy paste your **Heroku App URL** in the **Bot base URL**
 
 ## Step 3: Connect your bot to Messenger
