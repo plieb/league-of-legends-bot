@@ -24,7 +24,7 @@ function pandaApiCall(leagueId) {
       'filter[future]': true,
     },
   })
-  .catch(error => {
+  .catch(function(error) {
       return null
   });
 }
