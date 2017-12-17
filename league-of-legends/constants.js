@@ -8,7 +8,7 @@ const leaguesLoL = [
 
 function getLeagueId(league) {
   const row = leaguesLoL.find(function(elem) {
-    return elem.name.toLowerCase() === genre.toLowerCase();
+    return elem.name.toLowerCase() === league.toLowerCase();
   });
 
   if (row) {
