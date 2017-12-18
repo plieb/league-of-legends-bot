@@ -10,6 +10,9 @@ function loadLoLGetLeagueGamesRoute(app) {
 
     return getGames(leagueId)
       .then(function(carouselle) {
+        console.log('*******JSON*****')
+        console.log(carouselle)
+        console.log('*******JSON*****')
         res.json({
           replies: carouselle,
         });
