@@ -8,6 +8,9 @@ function getGames(leagueId) {
 }
 
 function pandaApiCall(leagueId) {
+  console.log('======================================')
+  console.log(leagueId)
+  console.log('======================================')
   return axios.get(`https://api.pandascore.co/leagues/${leagueId}/series`, {
     headers: {
         Authorization: `Bearer ${config.PANDA_TOKEN}`
@@ -16,7 +19,11 @@ function pandaApiCall(leagueId) {
       'filter[future]': true,
     },
   })
-  .then(data => axios.get(`https://api.pandascore.co/tournaments/${data.tournaments[0].id}/matches`, {
+  .then(data =>
+    console.log('======================================')
+    console.log(data)
+    console.log('======================================')
+    axios.get(`https://api.pandascore.co/tournaments/${data.tournaments[0].id}/matches`, {
     headers: {
         Authorization: `Bearer ${confid.PANDA_TOKEN}`
     },
