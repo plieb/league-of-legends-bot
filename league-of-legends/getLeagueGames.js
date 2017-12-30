@@ -1,13 +1,25 @@
 const axios = require('axios');
 const config = require('../config');
+const constants = require('./constants');
 
-function getGames(leagueId) {
-  return pandaApiCall(leagueId).then(response => {
-      return apiResultToCarousselle(response)
-  });
+function getLeagueGames(req, res) {
+  console.log('[GET] /lol-league-games');
+  const league = req.body.convgiersation.memory['league-name'];
+  const leagueId = constants.getLeagueId(league.value);
+
+  return leagueGamesApiCall(leagueId)
+    .then(apiResultToCarousselle)
+    .then(function(carouselle) {
+      res.json({
+        replies: carouselle,
+      });
+    })
+    .catch(function(err) {
+      console.error('getLeagueGames::getGames error: ', err);
+    });
 }
 
-function pandaApiCall(leagueId) {
+function leagueGamesApiCall(leagueId) {
   return axios.get(`https://api.pandascore.co/leagues/${leagueId}/series`, {
     headers: {
         Authorization: `Bearer ${config.PANDA_TOKEN}`
@@ -63,5 +75,5 @@ function apiResultToCarousselle(results) {
 }
 
 module.exports = {
-  getGames,
+  getLeagueGames,
 };

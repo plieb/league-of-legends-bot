@@ -2,12 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const config = require('./config');
-const loadLoLGetLeagueGamesRoute = require('./league-of-legends');
+const handlers = require('./league-of-legends');
 
 const app = express();
 app.use(bodyParser.json());
 
-loadLoLGetLeagueGamesRoute(app);
+app.post('/lol-league-games', handlers.getLeagueGames)
+app.post('/lol-team-games', handlers.getTeamGames)
 
 app.post('/errors', function(req, res) {
   console.log(req.body);
