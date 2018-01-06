@@ -6,12 +6,13 @@
   "author": "pe@recast.ai",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "nodemon": "^1.14.6"
   }
 }

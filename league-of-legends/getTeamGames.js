@@ -2,12 +2,16 @@ const axios = require('axios');
 const config = require('../config');
 const constants = require('./constants');
 
-function getLeagueGames(req, res) {
-  console.log('[GET] /lol-league-games');
-  const league = req.body.conversation.memory['league-name'];
-  const leagueId = constants.getLeagueId(league.value);
+function getTeamGames(req, res) {
+  console.log('[GET] /lol-team-games');
+  const team = req.body.conversation.memory['team-name'];
+  const teamId = constants.getTeamId(team.value);
 
-  return leagueGamesApiCall(leagueId)
+  console.log('=================TEAMID=====================')
+  console.log(teamId)
+  console.log('=================TEAMID=====================')
+
+  return teamGamesApiCall(teamId)
     .then(apiResultToCarousselle)
     .then(function(carouselle) {
       res.json({
@@ -15,12 +19,12 @@ function getLeagueGames(req, res) {
       });
     })
     .catch(function(err) {
-      console.error('getLeagueGames::getGames error: ', err);
+      console.error('getTeamGames::getGames error: ', err);
     });
 }
 
-function leagueGamesApiCall(leagueId) {
-  return axios.get(`https://api.pandascore.co/leagues/${leagueId}/series`, {
+function teamGamesApiCall(teamId) {
+  return axios.get(`https://api.pandascore.co/teams/${teamId}/matches`, {
     headers: {
         Authorization: `Bearer ${config.PANDA_TOKEN}`
     },
@@ -28,17 +32,10 @@ function leagueGamesApiCall(leagueId) {
       'filter[future]': true,
     },
   })
-  .then(res => {
-    return axios.get(`https://api.pandascore.co/tournaments/${res.data[0].tournaments[0].id}/matches`, {
-      headers: {
-        Authorization: `Bearer ${config.PANDA_TOKEN}`
-      },
-    })
-  })
   .catch(function(error) {
-    console.log('======================================')
+    console.log('---------ERROR-----------')
     console.log(error)
-    console.log('======================================')
+    console.log('---------ERROR-----------')
       return null
   });
 }
@@ -67,7 +64,7 @@ function apiResultToCarousselle(results) {
       {
         type: 'web_url',
         value: e.league.url,
-        title: 'View More',
+        title: 'View more about NA',
       },
     ],
   }));
@@ -78,5 +75,5 @@ function apiResultToCarousselle(results) {
 }
 
 module.exports = {
-  getLeagueGames,
+  getTeamGames,
 };
