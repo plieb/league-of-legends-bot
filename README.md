@@ -32,6 +32,7 @@ Follow the instructions below to create your bot:
 ## Authors
 
 PE Lieb [@liebpe](https://twitter.com/liebpe)
+
 Nathan Grasset [@Nathan_Grasset]( https://twitter.com/Nathan_Grasset)
 
 You can follow us on Twitter at [@recastai](https://twitter.com/recastai) for updates and releases.
