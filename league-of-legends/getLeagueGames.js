@@ -65,9 +65,14 @@ function apiResultToCarousselle(results) {
     imageUrl: e.league.image_url,
     buttons: [
       {
-        type: 'web_url',
-        value: e.league.url,
-        title: 'View More',
+        type: 'postback',
+        value: `Get me some information about ${e.opponents[0].opponent.acronym}`,
+        title: `${e.opponents[0].opponent.acronym} information`,
+      },
+      {
+        type: 'postback',
+        value: `Get me some information about ${e.opponents[1].opponent.acronym}`,
+        title: `${e.opponents[1].opponent.acronym} information`,
       },
     ],
   }));

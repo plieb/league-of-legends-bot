@@ -23,7 +23,7 @@ const teamsLoL = [
 
 function getLeagueId(league) {
   const row = leaguesLoL.find(function(elem) {
-    return (elem.name.toLowerCase() === league.toLowerCase() || elem.acronym.toLowerCase() === league.toLowerCase())
+    return (elem.name.toLowerCase() === league.toLowerCase())
   });
 
   if (row) {
@@ -34,7 +34,7 @@ function getLeagueId(league) {
 
 function getTeamId(team) {
   const row = teamsLoL.find(function(elem) {
-    return elem.name.toLowerCase() === team.toLowerCase();
+    return (elem.name.toLowerCase() === team.toLowerCase() || elem.acronym.toLowerCase() === team.toLowerCase())
   });
 
   if (row) {
