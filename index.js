@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 
 app.post('/lol-league-games', handlers.getLeagueGames)
 app.post('/lol-team-games', handlers.getTeamGames)
+app.post('/lol-team-roster', handlers.getTeamRoster)
 
 app.post('/errors', function(req, res) {
   console.log(req.body);

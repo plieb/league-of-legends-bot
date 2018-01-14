@@ -2,8 +2,8 @@ const axios = require('axios');
 const config = require('../config');
 const constants = require('./constants');
 
-function getTeamGames(req, res) {
-  console.log('[GET] /lol-team-games');
+function getTeamRoster(req, res) {
+  console.log('[GET] /lol-team-roster');
   const team = req.body.conversation.memory['team-name'];
   const teamId = constants.getTeamId(team.value);
 
@@ -11,7 +11,7 @@ function getTeamGames(req, res) {
   console.log(teamId)
   console.log('=================TEAMID=====================')
 
-  return teamGamesApiCall(teamId)
+  return teamRosterApiCall(teamId)
     .then(apiResultToCarousselle)
     .then(function(carouselle) {
       res.json({
@@ -19,12 +19,12 @@ function getTeamGames(req, res) {
       });
     })
     .catch(function(err) {
-      console.error('getTeamGames::getGames error: ', err);
+      console.error('getTeamRoster::getRoster error: ', err);
     });
 }
 
-function teamGamesApiCall(teamId) {
-  return axios.get(`https://api.pandascore.co/teams/${teamId}/matches`, {
+function teamRosterApiCall(teamId) {
+  return axios.get(`https://api.pandascore.co/teams/${teamId}`, {
     headers: {
         Authorization: `Bearer ${config.PANDA_TOKEN}`
     },
@@ -50,21 +50,21 @@ function apiResultToCarousselle(results) {
         type: 'quickReplies',
         content: {
           title: 'Sorry, but I could not find any results for your request :(',
-          buttons: [{ title: 'Start over', value: 'What can you do?' }],
+          buttons: [{ title: 'Start over', value: 'Start over' }],
         },
       },
     ];
   }
 
-  const cards = results.data.slice(0, 10).map(e => ({
+  const cards = results.data.players.slice(0, 10).map(e => ({
     title: e.name,
-    subtitle: e.begin_at || 'Date to be determined',
-    imageUrl: e.league.image_url,
+    subtitle: e.first_name + ' ' + e.last_name,
+    imageUrl: e.image_url,
     buttons: [
       {
-        type: 'web_url',
-        value: e.league.url,
-        title: 'View more about NA',
+        type: 'postback',
+        value: `What are the next games of ${results.data.name}`,
+        title: `${results.data.name} next games`,
       },
     ],
   }));
@@ -75,5 +75,5 @@ function apiResultToCarousselle(results) {
 }
 
 module.exports = {
-  getTeamGames,
+  getTeamRoster,
 };
