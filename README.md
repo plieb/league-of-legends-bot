@@ -29,9 +29,10 @@ Follow the instructions below to create your bot:
 1. Click the **Messenger** channel and follow the instructions
 1. You're all set !
 
-## Author
+## Authors
 
 PE Lieb [@liebpe](https://twitter.com/liebpe)
+Nathan Grasset [@Nathan_Grasset]( https://twitter.com/Nathan_Grasset)
 
 You can follow us on Twitter at [@recastai](https://twitter.com/recastai) for updates and releases.
 
