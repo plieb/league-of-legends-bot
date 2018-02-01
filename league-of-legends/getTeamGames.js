@@ -4,32 +4,65 @@ const constants = require('./constants');
 
 function getTeamGames(req, res) {
   console.log('[GET] /lol-team-games');
-  const team = req.body.conversation.memory['team-name'];
+  const memory = req.body.conversation.memory
+  const team = memory['team-name'];
   const teamId = constants.getTeamId(team.value);
 
   console.log('=================TEAMID=====================')
   console.log(teamId)
   console.log('=================TEAMID=====================')
 
-  return teamGamesApiCall(teamId)
-    .then(apiResultToCarousselle)
-    .then(function(carouselle) {
-      res.json({
-        replies: carouselle,
+  if (memory['next']) {
+    return futureTeamGamesApiCall(teamId)
+      .then(apiResultToCarousselle)
+      .then(function(carouselle) {
+        res.json({
+          replies: carouselle,
+        });
+      })
+      .catch(function(err) {
+        console.error('getTeamGames::getGames error: ', err);
       });
-    })
-    .catch(function(err) {
-      console.error('getTeamGames::getGames error: ', err);
-    });
+  } else {
+    return pastTeamGamesApiCall(teamId)
+      .then(apiResultToCarousselle)
+      .then(function(carouselle) {
+        res.json({
+          replies: carouselle,
+        });
+      })
+      .catch(function(err) {
+        console.error('getTeamGames::getGames error: ', err);
+      });
+  }
 }
 
-function teamGamesApiCall(teamId) {
+function futureTeamGamesApiCall(teamId) {
   return axios.get(`https://api.pandascore.co/teams/${teamId}/matches`, {
     headers: {
         Authorization: `Bearer ${config.PANDA_TOKEN}`
     },
     params: {
       'filter[future]': true,
+      'sort': 'begin_at',
+    },
+  })
+  .catch(function(error) {
+    console.log('---------ERROR-----------')
+    console.log(error)
+    console.log('---------ERROR-----------')
+      return null
+  });
+}
+
+function pastTeamGamesApiCall(teamId) {
+  return axios.get(`https://api.pandascore.co/teams/${teamId}/matches`, {
+    headers: {
+        Authorization: `Bearer ${config.PANDA_TOKEN}`
+    },
+    params: {
+      'filter[past]': true,
+      'sort': '-begin_at',
     },
   })
   .catch(function(error) {

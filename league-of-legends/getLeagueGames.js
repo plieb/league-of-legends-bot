@@ -4,34 +4,82 @@ const constants = require('./constants');
 
 function getLeagueGames(req, res) {
   console.log('[GET] /lol-league-games');
-  const league = req.body.conversation.memory['league-name'];
+  const memory = req.body.conversation.memory
+  const league = memory['league-name'];
   const leagueId = constants.getLeagueId(league.value);
 
-  return leagueGamesApiCall(leagueId)
-    .then(apiResultToCarousselle)
-    .then(function(carouselle) {
-      res.json({
-        replies: carouselle,
+  if (memory['next']) {
+    return futureLeagueGamesApiCall(leagueId)
+      .then(apiResultToCarousselle)
+      .then(function(carouselle) {
+        res.json({
+          replies: carouselle,
+        });
+      })
+      .catch(function(err) {
+        console.error('getLeagueGames::getGames error: ', err);
       });
-    })
-    .catch(function(err) {
-      console.error('getLeagueGames::getGames error: ', err);
-    });
+  } else {
+    return pastLeagueGamesApiCall(leagueId)
+      .then(apiResultToCarousselle)
+      .then(function(carouselle) {
+        res.json({
+          replies: carouselle,
+        });
+      })
+      .catch(function(err) {
+        console.error('getLeagueGames::getGames error: ', err);
+      });
+  }
 }
 
-function leagueGamesApiCall(leagueId) {
+function futureLeagueGamesApiCall(leagueId) {
   return axios.get(`https://api.pandascore.co/leagues/${leagueId}/series`, {
     headers: {
         Authorization: `Bearer ${config.PANDA_TOKEN}`
     },
     params: {
-      'filter[future]': true,
+      'filter[season]': 'Spring,Summer',
+      'sort' : '-begin_at',
     },
   })
   .then(res => {
     return axios.get(`https://api.pandascore.co/tournaments/${res.data[0].tournaments[0].id}/matches`, {
       headers: {
         Authorization: `Bearer ${config.PANDA_TOKEN}`
+      },
+      params: {
+        'filter[future]': true,
+        'sort': 'begin_at',
+      },
+    })
+  })
+  .catch(function(error) {
+    console.log('======================================')
+    console.log(error)
+    console.log('======================================')
+      return null
+  });
+}
+
+function pastLeagueGamesApiCall(leagueId) {
+  return axios.get(`https://api.pandascore.co/leagues/${leagueId}/series`, {
+    headers: {
+        Authorization: `Bearer ${config.PANDA_TOKEN}`
+    },
+    params: {
+      'filter[season]': 'Spring,Summer',
+      'sort' : '-begin_at',
+    },
+  })
+  .then(res => {
+    return axios.get(`https://api.pandascore.co/tournaments/${res.data[0].tournaments[0].id}/matches`, {
+      headers: {
+        Authorization: `Bearer ${config.PANDA_TOKEN}`
+      },
+      params: {
+        'filter[past]': true,
+        'sort': '-begin_at',
       },
     })
   })

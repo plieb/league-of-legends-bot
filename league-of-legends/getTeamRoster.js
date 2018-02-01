@@ -63,8 +63,8 @@ function apiResultToCarousselle(results) {
     buttons: [
       {
         type: 'postback',
-        value: `What are the next games of ${results.data.name}`,
-        title: `${results.data.name} next games`,
+        value: `What are the next games of ${results.data.acronym}`,
+        title: 'Next games',
       },
     ],
   }));
