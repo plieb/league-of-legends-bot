@@ -1,4 +1,5 @@
 const axios = require('axios');
+const moment = require('moment');
 const config = require('../config');
 const constants = require('./constants');
 
@@ -108,8 +109,8 @@ function apiResultToCarousselle(results) {
   }
 
   const cards = results.data.slice(0, 10).map(e => ({
-    title: e.name,
-    subtitle: e.begin_at || 'Date to be determined',
+    title: e.name.replace(/-/g, ' '),
+    subtitle: moment(e.begin_at).format('dddd, MMM Do YYYY, h:mm a') || 'Date to be determined',
     imageUrl: e.league.image_url,
     buttons: [
       {
